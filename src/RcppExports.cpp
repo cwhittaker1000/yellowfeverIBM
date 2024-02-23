@@ -11,24 +11,52 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// multi_probability_multinomial_process_internal
-Rcpp::XPtr<process_t> multi_probability_multinomial_process_internal(Rcpp::XPtr<CategoricalVariable> variable, const std::string source_state, const std::vector<std::string> destination_states, const Rcpp::XPtr<DoubleVariable> rate_variable, const std::vector<double> destination_probabilities);
-RcppExport SEXP _yellowfeverIBM_multi_probability_multinomial_process_internal(SEXP variableSEXP, SEXP source_stateSEXP, SEXP destination_statesSEXP, SEXP rate_variableSEXP, SEXP destination_probabilitiesSEXP) {
+// exposure_progression_listener_cpp_internal
+Rcpp::XPtr<targeted_listener_t> exposure_progression_listener_cpp_internal(Rcpp::XPtr<CategoricalVariable> health, Rcpp::XPtr<TargetedEvent> exposure_progression);
+RcppExport SEXP _yellowfeverIBM_exposure_progression_listener_cpp_internal(SEXP healthSEXP, SEXP exposure_progressionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<CategoricalVariable> >::type variable(variableSEXP);
-    Rcpp::traits::input_parameter< const std::string >::type source_state(source_stateSEXP);
-    Rcpp::traits::input_parameter< const std::vector<std::string> >::type destination_states(destination_statesSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::XPtr<DoubleVariable> >::type rate_variable(rate_variableSEXP);
-    Rcpp::traits::input_parameter< const std::vector<double> >::type destination_probabilities(destination_probabilitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(multi_probability_multinomial_process_internal(variable, source_state, destination_states, rate_variable, destination_probabilities));
+    Rcpp::traits::input_parameter< Rcpp::XPtr<CategoricalVariable> >::type health(healthSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<TargetedEvent> >::type exposure_progression(exposure_progressionSEXP);
+    rcpp_result_gen = Rcpp::wrap(exposure_progression_listener_cpp_internal(health, exposure_progression));
+    return rcpp_result_gen;
+END_RCPP
+}
+// exposure_infection_progression_process_cpp
+Rcpp::XPtr<process_t> exposure_infection_progression_process_cpp(Rcpp::XPtr<CategoricalVariable> health, Rcpp::XPtr<TargetedEvent> exposure_progression, double gamma_shape, double gamma_scale, double dt);
+RcppExport SEXP _yellowfeverIBM_exposure_infection_progression_process_cpp(SEXP healthSEXP, SEXP exposure_progressionSEXP, SEXP gamma_shapeSEXP, SEXP gamma_scaleSEXP, SEXP dtSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<CategoricalVariable> >::type health(healthSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<TargetedEvent> >::type exposure_progression(exposure_progressionSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_shape(gamma_shapeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_scale(gamma_scaleSEXP);
+    Rcpp::traits::input_parameter< double >::type dt(dtSEXP);
+    rcpp_result_gen = Rcpp::wrap(exposure_infection_progression_process_cpp(health, exposure_progression, gamma_shape, gamma_scale, dt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// exposure_process_cpp
+Rcpp::XPtr<process_t> exposure_process_cpp(Rcpp::XPtr<CategoricalVariable> health, double beta, double N, double dt);
+RcppExport SEXP _yellowfeverIBM_exposure_process_cpp(SEXP healthSEXP, SEXP betaSEXP, SEXP NSEXP, SEXP dtSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<CategoricalVariable> >::type health(healthSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type N(NSEXP);
+    Rcpp::traits::input_parameter< double >::type dt(dtSEXP);
+    rcpp_result_gen = Rcpp::wrap(exposure_process_cpp(health, beta, N, dt));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_yellowfeverIBM_multi_probability_multinomial_process_internal", (DL_FUNC) &_yellowfeverIBM_multi_probability_multinomial_process_internal, 5},
+    {"_yellowfeverIBM_exposure_progression_listener_cpp_internal", (DL_FUNC) &_yellowfeverIBM_exposure_progression_listener_cpp_internal, 2},
+    {"_yellowfeverIBM_exposure_infection_progression_process_cpp", (DL_FUNC) &_yellowfeverIBM_exposure_infection_progression_process_cpp, 5},
+    {"_yellowfeverIBM_exposure_process_cpp", (DL_FUNC) &_yellowfeverIBM_exposure_process_cpp, 4},
     {NULL, NULL, 0}
 };
 
